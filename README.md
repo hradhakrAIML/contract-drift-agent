@@ -6,7 +6,7 @@ An AI agent that screens partner contract PDFs for Finance approval. It auto-app
 
 **Source code is private. Live demo and code walkthrough available on request.**
 
-![Legal amendment drift flagged in the review dashboard](images/legal-amendment-drift.png)
+![Legal amendment drift flagged in the review dashboard](legal-amendment-drift.png)
 
 ## The problem
 
@@ -25,7 +25,7 @@ The costliest errors are not typos. They are **drift**: Legal amends a signed co
 | Match to labeled answers | 500 of 500 |
 | False approvals | 0 |
 
-These results use a deterministic extractor on template-generated PDFs, which proves the pipeline, rules, and gates end to end. Real-model accuracy on varied contracts is the next milestone. See [eval results](docs/eval-results.md).
+These results use a deterministic extractor on template-generated PDFs, which proves the pipeline, rules, and gates end to end. Real-model accuracy on varied contracts is the next milestone. See [eval results](eval-results.md).
 
 ## What it does
 
@@ -80,20 +80,20 @@ Defined before building and enforced on every change:
 ## Screens
 
 **Rate card drift:** one line changed, highlighted against the system record.
-![Rate card drift](images/rate-card-drift.png)
+![Rate card drift](rate-card-drift.png)
 
 **Rejected:** contract value does not match the approved deal.
-![Rejected value mismatch](images/rejected-value-mismatch.png)
+![Rejected value mismatch](rejected-value-mismatch.png)
 
 **Resolved:** reviewer decision, note, and system update request recorded for audit.
-![Resolved with audit note](images/resolved-with-audit-note.png)
+![Resolved with audit note](resolved-with-audit-note.png)
 
 **Dark mode**
-![Dark mode](images/dashboard-dark.png)
+![Dark mode](dashboard-dark.png)
 
 ## Design decisions
 
-A few of the tradeoffs, with more in the [decisions log](docs/decisions.md):
+A few of the tradeoffs, with more in the [decisions log](decisions.md):
 
 - **Drift escalates, it does not reject.** Post-approval Legal amendments are usually legitimate, so a reviewer decides and the system gets updated.
 - **Amended value wins.** The original clause stays in the PDF, so a naive extractor reads it and misses the change.
@@ -101,13 +101,14 @@ A few of the tradeoffs, with more in the [decisions log](docs/decisions.md):
 
 ## Docs
 
-- [Governance](docs/governance.md): data classification, PII handling, audit trail, access
-- [Decisions](docs/decisions.md): tradeoffs, bugs caught, what's next
-- [User guide](docs/user-guide.md): for Finance reviewers
-- [Eval results](docs/eval-results.md)
+- [Governance](governance.md): data classification, PII handling, audit trail, access
+- [Decisions](decisions.md): tradeoffs, bugs caught, what's next
+- [User guide](user-guide.md): for Finance reviewers
+- [Eval results](eval-results.md)
 
 ## Stack
 
 Python, FastAPI, Pydantic, Gemini on Vertex AI, pypdf, SQLite (BigQuery-ready schema), Docker, Cloud Run, GitHub Actions.
 
 All data is synthetic. No real partners, people, or contract terms are used.
+
